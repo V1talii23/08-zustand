@@ -21,6 +21,7 @@ function NotePreviewClient({ id }: NotePreviewClientProps) {
   } = useQuery({
     queryKey: ['note', id],
     queryFn: () => getNoteById(id),
+    refetchOnMount: false,
   });
 
   const date = note?.updatedAt

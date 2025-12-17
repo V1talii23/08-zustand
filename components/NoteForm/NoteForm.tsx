@@ -1,3 +1,6 @@
+'use client';
+import { Metadata } from 'next';
+
 import css from './NoteForm.module.css';
 import { useId } from 'react';
 import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
@@ -8,8 +11,15 @@ import { useQueryClient } from '@tanstack/react-query';
 import { KEY } from '@/types/constants';
 import type { CreateNoteData } from '../../types/note';
 
-interface NoteFormProps {
-  closeModal: () => void;
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Create new note',
+    description: 'Page for creating new notes',
+    openGraph: {
+      title: 'Note Hub, Create your note here',
+      description: 'Page for creating new notes',
+    },
+  };
 }
 
 interface FormValues {
@@ -31,7 +41,7 @@ const NoteSchema = Yup.object().shape({
     .required('Choose tag of the note'),
 });
 
-function NoteForm({ closeModal }: NoteFormProps) {
+function NoteForm() {
   const queryClient = useQueryClient();
 
   const id = useId();
@@ -54,7 +64,7 @@ function NoteForm({ closeModal }: NoteFormProps) {
         onSuccess: (data) => {
           console.log('Created note:', data);
           queryClient.invalidateQueries({ queryKey: [KEY] });
-          closeModal();
+          // closeModal();
         },
         onError: (error) => {
           console.log(error.message);
@@ -111,7 +121,7 @@ function NoteForm({ closeModal }: NoteFormProps) {
           <button
             type="button"
             className={css.cancelButton}
-            onClick={closeModal}
+            // onClick={closeModal}
           >
             Cancel
           </button>

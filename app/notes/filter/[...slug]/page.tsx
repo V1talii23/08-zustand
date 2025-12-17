@@ -3,17 +3,61 @@ import {
   QueryClient,
   HydrationBoundary,
 } from '@tanstack/react-query';
+import { Metadata } from 'next';
 import { getNotes } from '@/lib/api';
 import NotesClient from './Notes.client';
 import { KEY } from '@/types/constants';
 
 type FilteredNotesProps = {
   params: Promise<{ slug: string[] }>;
-  searchParams: Promise<{ search: string; page: string }>;
 };
 
-async function FilteredNotes({ searchParams, params }: FilteredNotesProps) {
-  const { search, page } = await searchParams;
+export const generateMetadata = async ({
+  params,
+}: FilteredNotesProps): Promise<Metadata> => {
+  const { slug } = await params;
+  const tag = slug[0] === 'all' ? undefined : slug[0];
+
+  if (!tag)
+    return {
+      title: `Notes`,
+      description: `All notes`,
+      openGraph: {
+        title: 'Notes page',
+        description: 'All notes',
+        url: 'http://localhost:3000/notes/filter/all',
+        images: [
+          {
+            url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+            width: 1200,
+            height: 630,
+            alt: 'Notes page',
+          },
+        ],
+      },
+    };
+
+  return {
+    title: `Notes: ${tag}`,
+    description: `Notes filtered by tag: ${tag}`,
+
+    openGraph: {
+      title: `${tag} notes`,
+      description: `Notes filtered by tag: ${tag}`,
+      url: `http://localhost:3000/notes/filter/${tag}`,
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'Note Hub',
+        },
+      ],
+    },
+  };
+};
+
+async function FilteredNotes({ params }: FilteredNotesProps) {
   const { slug } = await params;
 
   const tag = slug[0] === 'all' ? undefined : slug[0];
@@ -21,8 +65,8 @@ async function FilteredNotes({ searchParams, params }: FilteredNotesProps) {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: [KEY, search, page, tag],
-    queryFn: () => getNotes(search, +page, tag),
+    queryKey: [KEY, tag],
+    queryFn: () => getNotes('', 1, tag),
   });
 
   return (

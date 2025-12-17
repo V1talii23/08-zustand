@@ -2,6 +2,7 @@
 
 import css from '@/app/page.module.css';
 import { KEY } from '@/types/constants';
+import Link from 'next/link';
 import { getNotes } from '@/lib/api';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -22,14 +23,14 @@ interface NotesClientProps {
 function NotesClient({ tag }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => {
-    const el = document.getElementById('modal');
-    if (!el) alert('Something went wrong! Try to create note later.');
-    setIsModalOpen(true);
-  };
-  const closeModal = () => setIsModalOpen(false);
+  // const openModal = () => {
+  //   const el = document.getElementById('modal');
+  //   if (!el) alert('Something went wrong! Try to create note later.');
+  //   setIsModalOpen(true);
+  // };
+  // const closeModal = () => setIsModalOpen(false);
 
   const handleSearch = useDebouncedCallback((note: string) => {
     setSearch(note);
@@ -60,17 +61,18 @@ function NotesClient({ tag }: NotesClientProps) {
             currentPage={page}
           />
         )}
-        <button onClick={openModal} className={css.button}>
+
+        <Link className={css.button} href="/notes/action/create">
           Create note +
-        </button>
+        </Link>
       </header>
 
       {isSuccess && <NoteList notes={data.notes} />}
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <Modal onClose={closeModal}>
           <NoteForm closeModal={closeModal} />
         </Modal>
-      )}
+      )} */}
     </div>
   );
 }
