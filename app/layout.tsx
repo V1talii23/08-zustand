@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: 'Note Hub',
     description:
       'View and manage all your notes in one place. Keep track of tasks, ideas, meetings, and personal thoughts effortlessly.',
-    url: 'http://localhost:3000/notes/filter/all',
+    url: 'https://08-zustand-k51s5autg-v1talii23s-projects.vercel.app/notes/filter/all',
     images: [
       {
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',

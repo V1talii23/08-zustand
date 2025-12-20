@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: '404 - Page Not Found',
     description:
       'The page you are looking for does not exist or has been moved.',
-    url: 'http://localhost:3000/notes/filter/all',
+    url: 'https://08-zustand-k51s5autg-v1talii23s-projects.vercel.app/notes/filter/all',
     images: [
       {
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
