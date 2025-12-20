@@ -1,4 +1,4 @@
-import { Note } from '@/types/note';
+import { Note } from '@/types/noteStore';
 import Link from 'next/link';
 
 type Props = {

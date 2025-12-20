@@ -5,12 +5,12 @@ import { useId } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
-import { useNoteDraft } from '@/lib/store/NoteStore';
+import { useNoteDraft } from '@/lib/store/note';
 import { Metadata } from 'next';
 
 import { KEY } from '@/types/constants';
 import { createNote } from '@/lib/api';
-import type { CreateNoteData } from '../../types/note';
+import type { CreateNoteData } from '../../types/noteStore';
 
 export const metadata: Metadata = {
   title: 'Create Note',

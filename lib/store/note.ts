@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { CreateNoteData } from '@/types/note';
+import { CreateNoteData } from '@/types/noteStore';
 
 const initialDraft = {
   title: '',

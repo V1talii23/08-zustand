@@ -4,7 +4,7 @@
 
 import Link from 'next/link';
 import css from './NoteList.module.css';
-import type { Note } from '@/types/note';
+import type { Note } from '@/types/noteStore';
 import { useMutation } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { KEY } from '@/types/constants';
