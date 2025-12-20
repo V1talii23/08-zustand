@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Note, CreateNoteData } from '../types/noteStore';
+import type { Note, CreateNoteData } from '@/types/note';
 
 const NOTES_KEY = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 const URL = '/notes';
